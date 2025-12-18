@@ -9,15 +9,18 @@ module top (
 	input wire clk;
 	input wire reset;
 	output wire [31:0] WriteData;
-	
+	output wire [31:0] DataAdr;
+	output wire MemWrite;
 
 	wire [31:0] ReadData;
+	wire [31:0] PC;
+	wire [31:0] Instr;
 
 	risc risc(
 		.clk(clk),
 		.reset(reset),
 		.PC(PC),
-		.Inst(Instr),
+		.Instr(Instr),
 		.MemWrite(MemWrite),
 		.ALUResult(DataAdr),
 		.WriteData(WriteData),

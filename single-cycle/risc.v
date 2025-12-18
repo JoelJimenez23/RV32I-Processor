@@ -1,7 +1,7 @@
 module risc(
 	clk,
 	reset,
-	PCF,
+	PC,
 	Instr,
 	MemWrite,
 	ALUResult,
@@ -18,19 +18,30 @@ module risc(
 	output wire [31:0] WriteData;
 	input wire [31:0] ReadData;
 
+	wire Zero;
+	wire [1:0] ResultSrc;
+	wire [2:0] ALUControl;
+	wire [2:0] ImmSrc;
+	wire RegWrite;
+	wire Up;
+	wire Sub;
+
 	controller cl(
 		.clk(clk),
 		.reset(reset),
 		.Funct7(Instr[31:25]),
 		.Funct3(Instr[14:12]),
 		.OPcode(Instr[6:0]),
-		.PCsrc(PCSrc),
+		.PCSrc(PCSrc),
 		.ResultSrc(ResultSrc),
 		.MemWrite(MemWrite),
 		.ALUControl(ALUControl),
 		.ALUSrc(ALUSrc),
 		.ImmSrc(ImmSrc),
-		.RegWrite(RegWrite)
+		.RegWrite(RegWrite),
+		.Zero(Zero),
+		.Up(Up),
+		.Sub(Sub)
 	);
 
 
@@ -47,7 +58,10 @@ module risc(
 		.RegWrite(RegWrite),
 		.ALUResult(ALUResult),
 		.WriteData(WriteData),
-		.ReadData(ReadData)
+		.ReadData(ReadData),
+		.Zero(Zero),
+		.Up(Up),
+		.Sub(Sub)
 	);
 
 endmodule
