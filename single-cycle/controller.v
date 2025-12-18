@@ -115,7 +115,7 @@ module controller(
 		endcase
 	end
 
-	assign Sub = (OPcode[5] && Funct7[5]) ? 0 : 1;
+	assign Sub = (Funct3 == 3'b000 && OPcode[5] && Funct7[5]) ? 1 : 0;
 	assign PCSrc = ((Zero && Branch ) || Jump );
 
 endmodule
