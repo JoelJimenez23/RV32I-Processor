@@ -68,7 +68,7 @@ module controller(
 	end
 
 	assign {RegWrite,ImmSrc,ALUSrc,MemWrite,ResultSrc,Branch,ALUOp,Jump} = controls;
-	assign Up = (ImmSrc == 3'b011); 
+	assign Up = (ImmSrc === 3'b011) ? 1'b1 : 1'b0; 
 
 	always @(*) begin
 		casex (ALUOp) 
